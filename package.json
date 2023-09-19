@@ -1,0 +1,37 @@
+{
+  "name": "dylan-fisher-html5-boilerplate",
+  "version": "5.0.0",
+  "description": "HTML5 boilerplate that compiles Sass, autoprefixes, concatenates javascript, etc.",
+  "dependencies": {
+    "autoprefixer": "^10.4.15",
+    "bootstrap": "^5.3.1",
+    "esbuild": "^0.19.2",
+    "gsap": "^3.12.2",
+    "jquery": "^3.7.0",
+    "lodash": "^4.17.21",
+    "nodemon": "^3.0.1",
+    "postcss": "^8.4.28",
+    "postcss-cli": "^10.1.0",
+    "sass": "^1.66.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanfisher/bp.git"
+  },
+  "author": "Dylan Fisher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanfisher/bp/issues"
+  },
+  "homepage": "https://github.com/dylanfisher/bp#readme",
+  "scripts": {
+    "build": "esbuild assets/javascripts/src/application.js --bundle --sourcemap --outdir=assets/dist --public-path=/assets --minify --platform=node",
+    "build:css:compile": "sass ./assets/stylesheets/style.scss:./assets/dist/style.css --no-source-map --load-path=node_modules --quiet --style compressed",
+    "build:css:prefix": "postcss ./assets/dist/style.css --use=autoprefixer --output=./assets/dist/style.css",
+    "build:css": "yarn build:css:compile && yarn build:css:prefix",
+    "watch:css": "nodemon --watch ./assets/stylesheets/ --ext scss --exec \"yarn build:css\""
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

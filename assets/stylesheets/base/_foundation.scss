@@ -1,0 +1,32 @@
+// Foundation
+
+html {
+  @include body-text;
+  background-color: $blue;
+  color: $off-white;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+  @supports (height: 100svh) {
+    height: 100svh;
+  }
+}
+
+div {
+  vertical-align: top;
+}
+
+.application-wrapper {
+  flex: 1;
+}
+
+// .centered-page-content {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   min-height: 100svh;
+// }

@@ -1,0 +1,19 @@
+// Font stacks
+$abc-favorit: 'ABCFavorit-Regular', sans-serif;
+$totentanz: 'Totentanz_WEB-Slanted', serif;
+
+@mixin body-text {
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.4;
+  font-family: $abc-favorit;
+
+  @include breakpoint(md) {
+    font-size: 2vw;
+  }
+
+  @include breakpoint(lg) {
+    font-size: 1.6vw;
+  }
+}
+.body-text { @include body-text; }
