@@ -19,3 +19,10 @@ p {
     margin-bottom: 0;
   }
 }
+
+.text-max-width {
+  width: 500px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}

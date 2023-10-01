@@ -33,6 +33,10 @@
   &::placeholder {
     color: $gray;
   }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
 }
 
 .newsletter-overlay__submit {
@@ -47,4 +51,9 @@
   @include breakpoint(md) {
     width: auto;
   }
+}
+
+.mc-embed-signup-errors {
+  color: $orange;
+  font-size: 20px;
 }
