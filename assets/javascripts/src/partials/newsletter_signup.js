@@ -43,3 +43,36 @@ App.$document.on('click', '#newsletter-overlay__close', function() {
     }
   });
 });
+
+App.setEmailSignupSuccess = function() {
+  var $wrapper = $('#mc-embed-signup-form-wrapper');
+  var successMessage = $wrapper.attr('data-success-message');
+
+  $wrapper.html( '<div class="signup-form__success-message medium-text text-center color-blue">' + successMessage + '</div>' );
+};
+
+$(document).on('submit', '#mc-embed-signup-form', function() {
+  var $form = $(this);
+  var $wrapper = $form.closest('#mc-embed-signup-form-wrapper');
+  var $errors = $wrapper.find('#mc-embed-signup-errors');
+
+  $.ajax({
+    type: 'GET',
+    url: $form.attr('action'),
+    data: $form.serialize(),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+    error: function(data) {
+      $errors.addClass('active').html('Could not connect to the registration server.');
+    },
+    success: function(data) {
+      if ( data.result != 'success' ) {
+        $errors.addClass('active').html( data.msg.replace(/^\d* - /, '') );
+      } else {
+        App.setEmailSignupSuccess();
+      }
+    }
+  });
+
+  return false;
+});
