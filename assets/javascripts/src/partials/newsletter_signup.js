@@ -23,26 +23,42 @@ App.$document.on('click', '#newsletter-signup-button', function() {
   });
 });
 
-App.$document.on('click', '#newsletter-overlay__close', function() {
-  var $overlay = $('#newsletter-overlay');
-  var $inner = $('#newsletter-overlay__inner');
+(function() {
+  var closeNewsletterOverlay = function() {
+    var $overlay = $('#newsletter-overlay');
 
-  gsap.to($inner, {
-    opacity: 0,
-    duration: 0.75,
-    ease: 'linear',
-    onComplete: function() {
-      gsap.to($overlay, {
-        opacity: 0,
-        duration: 1,
-        ease: 'linear',
-        onComplete: function() {
-          $overlay.hide();
-        }
-      });
+    if ( !$overlay.is(':visible') ) {
+      return;
+    }
+
+    var $inner = $('#newsletter-overlay__inner');
+
+    gsap.to($inner, {
+      opacity: 0,
+      duration: 0.75,
+      ease: 'linear',
+      onComplete: function() {
+        gsap.to($overlay, {
+          opacity: 0,
+          duration: 1,
+          ease: 'linear',
+          onComplete: function() {
+            $overlay.hide();
+          }
+        });
+      }
+    });
+  };
+
+  App.$document.on('click', '#newsletter-overlay__close', closeNewsletterOverlay);
+
+  App.$document.on('keyup', function(e) {
+    // Escape key
+    if ( e.keyCode === 27 ) {
+      closeNewsletterOverlay();
     }
   });
-});
+})();
 
 App.setEmailSignupSuccess = function() {
   var $wrapper = $('#mc-embed-signup-form-wrapper');
